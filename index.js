@@ -10,6 +10,7 @@ const { connection } = require("mongoose");
 const app = express();
 const upload = multer({ dest: "uploads/" });
 const ObjectId = require("mongodb").ObjectId;
+
 app.use(cors());
 app.use(express.json());
 app.use(logger);
@@ -30,8 +31,7 @@ app.post("/api/upload/", upload.single("image"), (req, response) => {
     .then((res) => {
       response.status(200).json({ received: 200, id: res._id });
     })
-    .catch((e) => console.error(e))
-    .finally(connection.close());
+    .catch((e) => console.error(e));
 });
 
 //request image by id
@@ -50,5 +50,5 @@ app.use((request, response) => {
   response.status(404).json({ error: "Image not found" });
 });
 
-const PORT = process.env.PORT;
+const PORT = 3001;
 app.listen(PORT, () => console.log(`hosteando en ${PORT}`));
