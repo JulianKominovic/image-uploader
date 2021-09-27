@@ -61,5 +61,5 @@ app.use((request, response) => {
   response.status(404).json({ error: "Image not found" });
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`hosteando en ${PORT}`));
